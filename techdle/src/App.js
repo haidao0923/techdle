@@ -1,17 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
-import Dropdown from './Components/Dropdown';
-import ReactDropdown from 'react-dropdown';
-
-const options = [
-  'one', 'two', 'three'
-];
-const defaultOption = options[0];
+import Home from './Views/Home';
 
 function App() {
+
   return (
     <div className="App">
-      <Dropdown className='dropdown'/>
+      <Home />
     </div>
   );
 }
