@@ -5,9 +5,11 @@ import "../CSS/Home.css";
 import course_list from "../Data/course_list.txt";
 import major_list from "../Data/major_list.txt";
 function Home(props) {
-  const [courses, setCourses] = useState(LoadCourses());
-  const [majors, setMajors] = useState(LoadMajors());
-  const [major, setMajor] = useState(majors[0]);
+  const [courses, setCourses] = useState([]);
+  const [majors, setMajors] = useState([]);
+  const [major, setMajor] = useState();
+  LoadCourses();
+  LoadMajors();
   const [courseNumber, setCourseNumber] = useState(0);
   const [selected, setSelected] = useState([]);
 
@@ -25,17 +27,24 @@ function Home(props) {
   );
 
 	function CheckInput() {
-		if (courseNumber < 1000 || courseNumber > 9999) {
-			alert("Please input a valid course number between 1000 and 9999.")
+		if (major == undefined) {
+      alert("Please select a major.");
+    } else if (courseNumber < 1000 || courseNumber > 9999) {
+			alert("Please input a valid course number between 1000 and 9999.");
 		} else {
 			setSelected([major, courseNumber]);
 			UpdateGrid();
+      CheckVictory();
 		}
 	}
 
 	function UpdateGrid() {
 
 	}
+
+  function CheckVictory() {
+
+  }
 
   function LoadCourses() {
     useEffect(() => {
@@ -52,6 +61,7 @@ function Home(props) {
       .then((textContent) => {setMajors(textContent.split('\n'))})
     }, [])
   }
+
 }
 
 export default Home;

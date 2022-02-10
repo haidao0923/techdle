@@ -8,6 +8,7 @@ function Dropdown(props) {
         <div className="dropdown">
           <p>Major</p>
           <select onChange={e => props.setMajor(e.target.value)}>
+            <option disabled selected value> --select-- </option>
             {props.majors.map(function(i) {
               return (<option value={i}>{i}</option>);
             })}
