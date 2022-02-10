@@ -1,9 +1,9 @@
 .dropdowns {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .dropdown {
-    position: relative;
-    top: 100px;
+  position: relative;
+  top: 100px;
 }

@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import Dropdown from "../Components/Dropdown";
+import Grid from "../Components/Grid";
 import "../CSS/Home.css";
 import course_list from "../Data/course_list";
 import major_list from "../Data/major_list";
@@ -12,11 +13,12 @@ function Home(props) {
   return (
     <div>
       <Dropdown className='dropdown' majors={majors} setMajor={setMajor} setCourseNumber={setCourseNumber}/>
+      <Grid />
       <div className="button">
-        <p>You clicked {selected[0] + "; " + selected[1]} times</p>
         <button onClick={() => {
           CheckInput();
         }}>ENTER</button>
+        <p>You clicked {selected[0] + "; " + selected[1]} times</p>
       </div>
     </div>
   );
@@ -26,7 +28,12 @@ function Home(props) {
 			alert("Please input a valid course number between 1000 and 9999.")
 		} else {
 			setSelected([major, courseNumber]);
+			UpdateGrid();
 		}
+	}
+
+	function UpdateGrid() {
+
 	}
 }
 

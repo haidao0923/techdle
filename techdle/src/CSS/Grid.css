@@ -1,0 +1,17 @@
+.grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 10px;
+  top: 200px;
+  margin-left: 10%;
+  margin-right: 10%;
+  border: 5px solid red;
+}
+
+.box {
+  background-color: #444;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 150%;
+}
