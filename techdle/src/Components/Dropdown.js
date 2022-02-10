@@ -7,7 +7,7 @@ function Dropdown(props) {
       <div className="dropdowns">
         <div className="dropdown">
           <p>Major</p>
-          <select onChange={selected => props.setValue1(selected.target.value)}>
+          <select onChange={e => props.setMajor(e.target.value)}>
             {props.majors.map(function(i) {
               return (<option value={i}>{i}</option>);
             })}
@@ -15,11 +15,7 @@ function Dropdown(props) {
         </div>
         <div className="dropdown">
           <p>Course Number</p>
-          <select onChange={selected => props.setValue2(selected.target.value)}>
-            {props.option2.map(function(i) {
-              return (<option value={i}>{i}</option>);
-            })}
-          </select>
+          <input placeholder="1000-9999" type='number' onChange={e => props.setCourseNumber(e.target.value)} />
         </div>
       </div>
     </div>
