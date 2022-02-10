@@ -2,16 +2,15 @@ import React, {useState, useEffect} from "react";
 import Dropdown from "../Components/Dropdown";
 import Grid from "../Components/Grid";
 import "../CSS/Home.css";
-import major_list from "../Data/major_list";
 import course_list from "../Data/course_list.txt";
+import major_list from "../Data/major_list.txt";
 function Home(props) {
-	//var courses = course_list;
-	const majors = major_list;
+  const [courses, setCourses] = useState(LoadCourses());
+  const [majors, setMajors] = useState(LoadMajors());
   const [major, setMajor] = useState(majors[0]);
   const [courseNumber, setCourseNumber] = useState(0);
   const [selected, setSelected] = useState([]);
 
-  const [courses, setCourses] = useState(LoadCourses());
   return (
     <div>
       <Dropdown className='dropdown' majors={majors} setMajor={setMajor} setCourseNumber={setCourseNumber}/>
@@ -43,6 +42,14 @@ function Home(props) {
       fetch(course_list)
       .then((response) => response.text())
       .then((textContent) => {setCourses(textContent.split('\n'))})
+    }, [])
+  }
+
+  function LoadMajors() {
+    useEffect(() => {
+      fetch(major_list)
+      .then((response) => response.text())
+      .then((textContent) => {setMajors(textContent.split('\n'))})
     }, [])
   }
 }
