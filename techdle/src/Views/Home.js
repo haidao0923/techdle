@@ -38,6 +38,7 @@ function Home(props) {
     console.log(boxArray);
     console.log(boxColor);
     console.log(correctNumberString);
+    CheckVictory();
   }, [selectedMajor, selectedNumberString])
 
   return (
@@ -130,15 +131,17 @@ function Home(props) {
 	}
 
   function CheckVictory() {
-
+    if (selectedMajor == correctMajor && selectedNumberString == correctNumberString) {
+      alert("You Win!");
+    }
   }
 
   function GetCorrectValue() {
     var random = courses[parseInt(Math.random() * courses.length)];
     setCorrectMajor(random.split(" ")[0]);
     const correctCourseNumber = random.split(" ")[1];
-    setCorrectCourseNumber(correctCourseNumber);
     const correctCreditHour = random.charAt(random.length - 2);
+    setCorrectCourseNumber(correctCourseNumber);
     setCorrectCreditHour(correctCreditHour);
     setCorrectNumberString(correctCourseNumber.toString() + correctCreditHour);
   }

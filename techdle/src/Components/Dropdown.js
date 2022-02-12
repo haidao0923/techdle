@@ -16,11 +16,27 @@ function Dropdown(props) {
         </div>
         <div className="dropdown-component course-number">
           <p className="text">Course Number</p>
-          <input placeholder="1000-9999" min={1000} max={9999} type='number' onChange={e => props.setCourseNumber(e.target.value)} />
+          <input
+            placeholder="1000-9999"
+            min={1000}
+            max={9999}
+            type='number'
+            onChange={e => {
+              e.target.value = e.target.value.replace(/^0+(?!$)/, "");
+              props.setCourseNumber(e.target.value);
+          }} />
         </div>
         <div className="dropdown-component credit-hour">
           <p className="text">Credit Hour</p>
-          <input min={0} max={9} placeholder="0-9" type='number' onChange={e => props.setCreditHour(e.target.value)} />
+          <input
+            placeholder="0-9"
+            min={0}
+            max={9}
+            type='number'
+            onChange={e => {
+              e.target.value = e.target.value.replace(/^0+(?!$)/, "");
+              props.setCreditHour(e.target.value);
+          }} />
         </div>
       </div>
     </div>
