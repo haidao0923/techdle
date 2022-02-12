@@ -1,3 +1,0 @@
-const major_list = ['ACCT', 'AE', 'AS', 'APPH', 'ASE', 'ARBC', 'ARCH', 'BIOS', 'BIOL', 'BMEJ', 'BMED', 'BMEM', 'BC', 'BCP', 'CETL', 'CHBE', 'CHEM', 'CHIN', 'CP', 'CEE', 'COA', 'COE', 'COS', 'CX', 'CSE', 'CS', 'COOP', 'UCGA', 'EAS', 'ECON', 'ECEP', 'ECE', 'ENGL', 'FS', 'FREE', 'FREN', 'GT', 'GTL', 'GRMN', 'HP', 'HS', 'HEBW', 'HIN', 'HIST', 'HTS', 'HUM', 'ID', 'ISYE', 'INTA', 'IL', 'INTN', 'IMBA', 'IPIN', 'IPSA', 'IAC', 'JAPN', 'KOR', 'LATN', 'LS', 'LING', 'LMC', 'MGT', 'MOT', 'MLDR', 'MSE', 'MATH', 'ME', 'MP', 'MSL', 'ML', 'MUSI', 'NS', 'NEUR', 'NRE', 'PERS', 'PHIL', 'PHYS', 'POL', 'PTFE', 'DOPP', 'PSYC', 'PUBJ', 'PUBP', 'RUSS', 'SCI', 'SLS', 'SS', 'SOC', 'SPAN', 'SWAH'];
-
-export default major_list;

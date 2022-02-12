@@ -1,4 +1,13 @@
 .button {
   position: relative;
-  top: 100px;
+  top: 20px;
+}
+
+.background {
+  background-color: #003057;
+  min-height: 100vh;
+}
+
+.text {
+  color: white;
 }

@@ -3,7 +3,7 @@
   justify-content: center;
 }
 
-.dropdown {
-  position: relative;
-  top: 100px;
+.dropdown-component {
+  margin-left: 5px;
+  margin-right: 5px;
 }
