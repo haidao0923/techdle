@@ -9,7 +9,12 @@ function NavBar(props) {
           className="nav-button"
           onClick={() => props.setInstructionPopup(true)}>Instruction
         </button>
-        <button className="nav-button">Test2</button>
+        <button
+          className="nav-button"
+          onClick={() => props.resetGame()}>Reset</button>
+        <button
+          className="nav-button"
+          onClick={() => props.getPreviousShareString()}>Share Previous Word</button>
       </div>
       <div className="nav-center">
         <h1 className="nav-title">Techdle</h1>

@@ -17,7 +17,7 @@ function Dropdown(props) {
         <div className="dropdown-component course-number">
           <p className="text">Course Number</p>
           <input
-            placeholder="1000-9999"
+            placeholder="4 digits"
             min={1000}
             max={9999}
             type='number'
@@ -29,7 +29,7 @@ function Dropdown(props) {
         <div className="dropdown-component credit-hour">
           <p className="text">Credit Hour</p>
           <input
-            placeholder="0-9"
+            placeholder="1 digit"
             min={0}
             max={9}
             type='number'

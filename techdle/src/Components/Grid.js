@@ -8,13 +8,13 @@ function Grid(props) {
       {props.boxArray.map((element, index) => {
         return(<div
           className="box"
-          style={{backgroundColor: ConvertColor(props.boxColor[index])}}>{element}
+          style={{backgroundColor: convertColor(props.boxColor[index])}}>{element}
         </div>)
       })}
     </div>
   )
 
-  function ConvertColor(color) {
+  function convertColor(color) {
     if (color == "gold") {
       return "#A28D5B";
     } else {

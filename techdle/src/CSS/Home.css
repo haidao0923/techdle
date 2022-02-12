@@ -1,6 +1,8 @@
-.button {
+.enter-btn {
   position: relative;
-  top: 20px;
+  top: 10px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .background {
@@ -10,4 +12,19 @@
 
 .text {
   color: white;
+}
+
+.text-description {
+  color: #A28D5B;
+}
+
+.share-btn, .close-btn, .start-btn {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.give-up-btn {
+  margin-top: 50px;
+  font-size: 30px;
+  font-weight: bold;
 }

@@ -28,33 +28,49 @@ function Home(props) {
 
   const [boxArray, setBoxArray] = useState([]);
   const [boxColor, setBoxColor] = useState([]);
+  const [victoryPopup, setVictoryPopup] = useState(false);
+  const [losePopup, setLosePopup] = useState(false);
+  const [gameEnd, setGameEnd] = useState(false);
+  const [shareString, setShareString] = useState();
 
   useEffect(() => {
     if (correctNumberString == undefined) {
       return;
     }
-    UpdateGrid();
+    updateGrid();
     console.log("test");
     console.log(boxArray);
     console.log(boxColor);
     console.log(correctNumberString);
-    CheckVictory();
+    checkVictory();
   }, [selectedMajor, selectedNumberString])
 
   return (
     <div className="background">
-      <NavBar setInstructionPopup={setInstructionPopup}/>
+      <NavBar
+        setInstructionPopup={setInstructionPopup}
+        resetGame={resetGame}
+        getPreviousShareString={getPreviousShareString}/>
       <Dropdown
         className='dropdown'
         majors={majors}
         setMajor={setMajor}
         setCourseNumber={setCourseNumber}
         setCreditHour={setCreditHour}/>
-      <div className="button">
-        <button onClick={() => CheckInput()}>ENTER</button>
-        <p className="text">You clicked {correctMajor + " " + correctNumberString} times</p>
+      <div>
+        <button  className="enter-btn" disabled={gameEnd} onClick={() => checkInput()}>ENTER</button>
+        <p className="text-description">The list of courses is taken from <a className="text-description" href="https://catalog.gatech.edu/coursesaz/" target="_blank">https://catalog.gatech.edu/coursesaz/</a></p>
+        <p className="text-description">Only courses with 4-digit course numbers are considered</p>
       </div>
       <Grid boxArray={boxArray} boxColor={boxColor}/>
+      <div>
+        <button
+          className="give-up-btn"
+          onClick={() => {
+            setGameEnd(true);
+            setLosePopup(true);
+        }}>I Give Up</button>
+      </div>
       <Popup
         className="instruction"
         isActive={instructionPopup}>
@@ -72,15 +88,53 @@ function Home(props) {
             className="start-btn"
             onClick={() => {
               setWelcomePopup(false);
-              GetCorrectValue();
+              getCorrectValue();
             }}>Start Game
           </button>
       </Popup>
-      <Test></Test>
+      <Popup
+        className="victory"
+        isActive={victoryPopup}>
+          <h3>You win!</h3>
+          <button
+            className="share-btn"
+            onClick={() => {
+              getShareString();
+            }}>Share
+          </button>
+          <button
+            className="close-btn"
+            onClick={() => {
+              setVictoryPopup(false);
+            }}>Close
+          </button>
+      </Popup>
+      <Popup
+        className="lose"
+        isActive={losePopup}>
+          <h3>You lose!</h3>
+          <h4>The correct course was</h4>
+          <h4>Major: {correctMajor}</h4>
+          <h4>Course Number: {correctCourseNumber}</h4>
+          <h4>Credit Hour: {correctCreditHour}</h4>
+          <button
+            className="reset-btn"
+            onClick={() => {
+              setLosePopup(false);
+              resetGame();
+            }}>Reset
+          </button>
+          <button
+            className="close-btn"
+            onClick={() => {
+              setLosePopup(false);
+            }}>Close
+          </button>
+      </Popup>
     </div>
   );
 
-	function CheckInput() {
+	function checkInput() {
 		if (major == undefined) {
       alert("Please select a major.");
     } else if (courseNumber < 1000 || courseNumber > 9999) {
@@ -93,7 +147,7 @@ function Home(props) {
 		}
 	}
 
-	function UpdateGrid() {
+	function updateGrid() {
 
     var tempBoxArray = Array.from({length: 6}).fill("");
     var tempBoxColorArray = Array.from({length: 6}).fill("black");
@@ -130,13 +184,14 @@ function Home(props) {
     setBoxColor([...boxColor, ...tempBoxColorArray]);
 	}
 
-  function CheckVictory() {
+  function checkVictory() {
     if (selectedMajor == correctMajor && selectedNumberString == correctNumberString) {
-      alert("You Win!");
+      setGameEnd(true);
+      setVictoryPopup(true);
     }
   }
 
-  function GetCorrectValue() {
+  function getCorrectValue() {
     var random = courses[parseInt(Math.random() * courses.length)];
     setCorrectMajor(random.split(" ")[0]);
     const correctCourseNumber = random.split(" ")[1];
@@ -144,6 +199,44 @@ function Home(props) {
     setCorrectCourseNumber(correctCourseNumber);
     setCorrectCreditHour(correctCreditHour);
     setCorrectNumberString(correctCourseNumber.toString() + correctCreditHour);
+  }
+
+  function getShareString() {
+    var returnString = "Techdle"
+      + "\nMajor: " + correctMajor
+      + "\nCourse Number: " + correctCourseNumber
+      + "\nCredit Hour: " + correctCreditHour;
+    for (var i = 0; i < boxColor.length; i++) {
+      if (i % 6 == 0) {
+        returnString += "\n";
+      }
+      if (boxColor[i] == "black") {
+        returnString += "⬛";
+      } else if (boxColor[i] == "gold") {
+        returnString += "🟨";
+      } else {
+        returnString += "🟩";
+      }
+    }
+    setShareString(returnString);
+    navigator.clipboard.writeText(returnString);
+    alert("Text copied to clipboard.");
+  }
+
+  function getPreviousShareString() {
+    if (shareString == undefined) {
+      alert("No previous word completed.");
+    } else {
+      navigator.clipboard.writeText(shareString);
+      alert("Text copied to clipboard.");
+    }
+  }
+
+  function resetGame() {
+    setGameEnd(false);
+    getCorrectValue();
+    setBoxArray([]);
+    setBoxColor([]);
   }
 
   function LoadCourses() {
