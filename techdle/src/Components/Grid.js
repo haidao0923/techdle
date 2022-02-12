@@ -4,7 +4,7 @@ import "../CSS/Grid.css";
 function Grid(props) {
 
   return (
-    <div className="grid">
+    <div className="grid" style={{gridTemplateColumns: getColumnAmount(props.difficultyLength[props.difficulty])}}>
       {props.boxArray.map((element, index) => {
         return(<div
           className="box"
@@ -20,6 +20,10 @@ function Grid(props) {
     } else {
       return color;
     }
+  }
+
+  function getColumnAmount(columnAmount) {
+    return '1fr '.repeat(columnAmount);
   }
 }
 

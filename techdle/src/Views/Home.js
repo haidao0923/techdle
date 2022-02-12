@@ -33,6 +33,9 @@ function Home(props) {
   const [gameEnd, setGameEnd] = useState(false);
   const [shareString, setShareString] = useState();
 
+  const difficultyLength = [9, 6];
+  const [difficulty, setDifficulty] = useState(0);
+
   useEffect(() => {
     if (correctNumberString == undefined) {
       return;
@@ -50,7 +53,9 @@ function Home(props) {
       <NavBar
         setInstructionPopup={setInstructionPopup}
         resetGame={resetGame}
-        getPreviousShareString={getPreviousShareString}/>
+        getPreviousShareString={getPreviousShareString}
+        difficulty={difficulty}
+        setDifficulty={setDifficulty}/>
       <Dropdown
         className='dropdown'
         majors={majors}
@@ -62,7 +67,11 @@ function Home(props) {
         <p className="text-description">The list of courses is taken from <a className="text-description" href="https://catalog.gatech.edu/coursesaz/" target="_blank">https://catalog.gatech.edu/coursesaz/</a></p>
         <p className="text-description">Only courses with 4-digit course numbers are considered</p>
       </div>
-      <Grid boxArray={boxArray} boxColor={boxColor}/>
+      <Grid
+        boxArray={boxArray}
+        boxColor={boxColor}
+        difficulty={difficulty}
+        difficultyLength={difficultyLength}/>
       <div>
         <button
           className="give-up-btn"
@@ -149,31 +158,54 @@ function Home(props) {
 
 	function updateGrid() {
 
-    var tempBoxArray = Array.from({length: 6}).fill("");
-    var tempBoxColorArray = Array.from({length: 6}).fill("black");
-    tempBoxArray[0] = selectedMajor;
-    console.log(tempBoxArray[0] == correctMajor);
-    if (tempBoxArray[0] == correctMajor) {
-      tempBoxColorArray[0] = "green";
+    var tempBoxArray = Array.from({length: difficultyLength[difficulty]}).fill("");
+    var tempBoxColorArray = Array.from({length: difficultyLength[difficulty]}).fill("black");
+
+    if (difficulty == 1) {
+      tempBoxArray[0] = selectedMajor;
+      if (tempBoxArray[0] == correctMajor) {
+        tempBoxColorArray[0] = "green";
+      } else {
+        for (var i = 0; i < correctMajor.length; i++) {
+          for (var j = 0; j < tempBoxArray[0].length; j++) {
+            if (correctMajor.charAt(i) == tempBoxArray[0].charAt(j)) {
+              tempBoxColorArray[0] = "gold";
+              break;
+            }
+          }
+        }
+      }
     } else {
-      for (var i = 0; i < correctMajor.length; i++) {
-        for (var j = 0; j < tempBoxArray[0].length; j++) {
-          if (correctMajor.charAt(i) == tempBoxArray[0].charAt(j)) {
-            tempBoxColorArray[0] = "gold";
-            break;
+      const paddedCorrectMajor = correctMajor.padStart(4, " ");
+      const paddedSelectedMajor = selectedMajor.padStart(4, " ");
+
+      for (var i = 0; i < paddedCorrectMajor.length; i++) {
+        tempBoxArray[i] = paddedSelectedMajor.charAt(i);
+        if (paddedCorrectMajor.charAt(i) == paddedSelectedMajor.charAt(i)) {
+          tempBoxColorArray[i] = "green";
+        } else {
+          for (var j = 0; j < paddedSelectedMajor.length; j++) {
+            if (paddedSelectedMajor.charAt(j) == paddedCorrectMajor.charAt(i)) {
+              if (tempBoxColorArray[j] == "black") {
+                tempBoxColorArray[j] = "gold";
+                break;
+              }
+            }
           }
         }
       }
     }
+
+    var offset = difficultyLength[difficulty] - 5;
     for (var i = 0; i < correctNumberString.length; i++) {
-      tempBoxArray[i + 1] = selectedNumberString.charAt(i);
+      tempBoxArray[i + offset] = selectedNumberString.charAt(i);
       if (correctNumberString.charAt(i) == selectedNumberString.charAt(i)) {
-        tempBoxColorArray[i + 1] = "green";
+        tempBoxColorArray[i + offset] = "green";
       } else {
         for (var j = 0; j < selectedNumberString.length; j++) {
           if (selectedNumberString.charAt(j) == correctNumberString.charAt(i)) {
-            if (tempBoxColorArray[j + 1] == "black") {
-              tempBoxColorArray[j + 1] = "gold";
+            if (tempBoxColorArray[j + offset] == "black") {
+              tempBoxColorArray[j + offset] = "gold";
               break;
             }
           }
@@ -203,11 +235,12 @@ function Home(props) {
 
   function getShareString() {
     var returnString = "Techdle"
+      + (difficulty == 0) ? "\nMode: Easy" : "\nMode: Hard"
       + "\nMajor: " + correctMajor
       + "\nCourse Number: " + correctCourseNumber
       + "\nCredit Hour: " + correctCreditHour;
     for (var i = 0; i < boxColor.length; i++) {
-      if (i % 6 == 0) {
+      if (i %  difficultyLength[difficulty] == 0) {
         returnString += "\n";
       }
       if (boxColor[i] == "black") {
