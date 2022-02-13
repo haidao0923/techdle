@@ -272,7 +272,7 @@ function Home(props) {
     if (shareString == undefined) {
       alert("No previous word completed.");
     } else {
-      navigator.clipboard.writeText(returnString).then(() => {
+      navigator.clipboard.writeText(shareString).then(() => {
         alert("Text copied to clipboard.");
       });
     }
