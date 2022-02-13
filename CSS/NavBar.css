@@ -1,0 +1,34 @@
+.nav-background {
+  background-color: #b3a369;
+  height: 5em;
+  display: flex;
+  align-items: center;
+}
+
+.nav-left, .nav-right {
+  flex: 1;
+}
+
+.nav-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.nav-left {
+  margin-left: 20px;
+  display: flex;
+}
+
+.nav-right {
+  margin-right: 20px;
+}
+
+.nav-button {
+  margin: 5px;
+  font-weight: bold;
+}
+
+.nav-title {
+  margin: 0px;
+}

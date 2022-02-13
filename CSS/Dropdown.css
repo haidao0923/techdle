@@ -1,0 +1,21 @@
+.dropdowns {
+  display: flex;
+  justify-content: center;
+}
+
+.dropdown-component {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

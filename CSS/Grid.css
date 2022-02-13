@@ -1,0 +1,19 @@
+.grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  grid-gap: 10px;
+  top: 20px;
+  margin-left: 10%;
+  margin-right: 10%;
+  border: 5px solid darkred;
+}
+
+.box {
+  background-color: black;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 150%;
+  font-weight: bold;
+}
