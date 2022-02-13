@@ -263,16 +263,18 @@ function Home(props) {
       }
     }
     setShareString(returnString);
-    navigator.clipboard.writeText(returnString);
-    alert("Text copied to clipboard.");
+    navigator.clipboard.writeText(returnString).then(() => {
+      alert("Text copied to clipboard.");
+    });
   }
 
   function getPreviousShareString() {
     if (shareString == undefined) {
       alert("No previous word completed.");
     } else {
-      navigator.clipboard.writeText(shareString);
-      alert("Text copied to clipboard.");
+      navigator.clipboard.writeText(returnString).then(() => {
+        alert("Text copied to clipboard.");
+      });
     }
   }
 
