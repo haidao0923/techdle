@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/techdle/static/css/main.65324266.css",
-    "main.js": "/techdle/static/js/main.2ca81c90.js",
+    "main.js": "/techdle/static/js/main.2c120c95.js",
     "static/js/787.e77046bb.chunk.js": "/techdle/static/js/787.e77046bb.chunk.js",
     "static/media/beekeeper_gif.gif": "/techdle/static/media/beekeeper_gif.e903abb50009dd3197ee.gif",
     "static/media/course_list.txt": "/techdle/static/media/course_list.c52839966b7557955da9.txt",
@@ -9,11 +9,11 @@
     "index.html": "/techdle/index.html",
     "static/media/major_list.txt": "/techdle/static/media/major_list.9e8484cff2b64ec9f996.txt",
     "main.65324266.css.map": "/techdle/static/css/main.65324266.css.map",
-    "main.2ca81c90.js.map": "/techdle/static/js/main.2ca81c90.js.map",
+    "main.2c120c95.js.map": "/techdle/static/js/main.2c120c95.js.map",
     "787.e77046bb.chunk.js.map": "/techdle/static/js/787.e77046bb.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.65324266.css",
-    "static/js/main.2ca81c90.js"
+    "static/js/main.2c120c95.js"
   ]
 }
