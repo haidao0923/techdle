@@ -39,10 +39,6 @@ function Home(props) {
       return;
     }
     updateGrid();
-    console.log("test");
-    console.log(boxArray);
-    console.log(boxColor);
-    console.log(correctNumberString);
     checkVictory();
   }, [selectedMajor, selectedNumberString])
 
@@ -272,8 +268,6 @@ function Home(props) {
   }
 
   function getPreviousShareString() {
-    console.log(correctMajor);
-    console.log(correctNumberString);
     if (shareString == undefined) {
       alert("No previous word completed.");
     } else {
