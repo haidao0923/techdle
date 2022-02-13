@@ -18,6 +18,11 @@
   color: #A28D5B;
 }
 
+.welcome-text {
+  font-size: 20px;
+  color: navy;
+}
+
 .share-btn, .close-btn, .start-btn {
   margin-left: 20px;
   margin-right: 20px;

@@ -7,15 +7,13 @@ import "../CSS/Home.css";
 import course_list from "../Data/course_list.txt";
 import major_list from "../Data/major_list.txt";
 
-import Test from "../Components/Test";
-
 function Home(props) {
   const [courses, setCourses] = useState([]);
   const [majors, setMajors] = useState([]);
   LoadCourses();
   LoadMajors();
   const [welcomePopup, setWelcomePopup] = useState(true);
-  const [instructionPopup, setInstructionPopup] = useState(true);
+  const [instructionPopup, setInstructionPopup] = useState(false);
   const [major, setMajor] = useState();
   const [courseNumber, setCourseNumber] = useState(0);
   const [creditHour, setCreditHour] = useState();
@@ -83,7 +81,19 @@ function Home(props) {
       <Popup
         className="instruction"
         isActive={instructionPopup}>
-          <h3>Instruction</h3>
+          <h1>Instruction</h1>
+          <p className="instruction-caption">Guess the randomly chosen course among a list of over 5000 courses.</p>
+          <p className="instruction-caption">As you make guesses, you will receive hints in the form of highlighted letter or digit.</p>
+          <img width="80%" src={require("../Images/Instruction_Row_1.png")}/>
+          <h5 className="instruction-caption">Black highlight means that the letter or digit <u>does not exist</u> in the answer.</h5>
+          <img width="80%" src={require("../Images/Instruction_Row_2.png")}/>
+          <h5 className="instruction-caption">Yellow highlight means that the letter or digit <u>exist</u> in the answer but in the <u>wrong</u> place.</h5>
+          <img width="80%" src={require("../Images/Instruction_Row_3.png")}/>
+          <h5 className="instruction-caption">Green highlight means that the letter or digit <u>exist</u> in the answer and in the <u>right</u> place.</h5>
+          <img width="80%" src={require("../Images/Instruction_Row_4.png")}/>
+          <h5 className="instruction-caption">Try your best to get the correct answer in as few guesses as possible!</h5>
+          <img width="80%" src={require("../Images/Instruction_Hard_Mode.png")}/>
+          <h4 className="instruction-caption">In hardmode, the major section is condense into 1 column and it will be highlighted if at least one letter is in the correct answer! Don't be discouraged, because you can still narrow it down with process of elimination.</h4>
           <button
             className="close-btn"
             onClick={() => setInstructionPopup(false)}>Close
@@ -92,11 +102,14 @@ function Home(props) {
       <Popup
         className="welcome"
         isActive={welcomePopup}>
-          <h3>Welcome to Techdle</h3>
+          <h1>Welcome to Techdle</h1>
+          <p className="welcome-text">Techdle is a variation on the Wordle game based upon a scraped list of over 5000 Georgia Tech courses.</p>
+          <p>Made by <i>Hai Dao</i></p>
           <button
             className="start-btn"
             onClick={() => {
               setWelcomePopup(false);
+              setInstructionPopup(true);
               getCorrectValue();
             }}>Start Game
           </button>
@@ -104,7 +117,9 @@ function Home(props) {
       <Popup
         className="victory"
         isActive={victoryPopup}>
-          <h3>You win!</h3>
+          <h1>You win!</h1>
+          <img src={require("../Images/beekeeper_gif.gif")}/>
+          <br /><br />
           <button
             className="share-btn"
             onClick={() => {
@@ -121,7 +136,7 @@ function Home(props) {
       <Popup
         className="lose"
         isActive={losePopup}>
-          <h3>You lose!</h3>
+          <h1>You lose!</h1>
           <h4>The correct course was</h4>
           <h4>Major: {correctMajor}</h4>
           <h4>Course Number: {correctCourseNumber}</h4>
@@ -195,7 +210,6 @@ function Home(props) {
         }
       }
     }
-
     var offset = difficultyLength[difficulty] - 5;
     for (var i = 0; i < correctNumberString.length; i++) {
       tempBoxArray[i + offset] = selectedNumberString.charAt(i);
@@ -235,10 +249,11 @@ function Home(props) {
 
   function getShareString() {
     var returnString = "Techdle"
-      + (difficulty == 0) ? "\nMode: Easy" : "\nMode: Hard"
+      + "\nhttps://haidao0923.github.io/techdle/"
       + "\nMajor: " + correctMajor
       + "\nCourse Number: " + correctCourseNumber
       + "\nCredit Hour: " + correctCreditHour;
+    returnString += (difficulty == 0) ? "\nMode: Easy" : "\nMode: Hard";
     for (var i = 0; i < boxColor.length; i++) {
       if (i %  difficultyLength[difficulty] == 0) {
         returnString += "\n";
@@ -257,6 +272,8 @@ function Home(props) {
   }
 
   function getPreviousShareString() {
+    console.log(correctMajor);
+    console.log(correctNumberString);
     if (shareString == undefined) {
       alert("No previous word completed.");
     } else {

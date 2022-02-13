@@ -15,5 +15,10 @@
   padding: 32px;
   width: 100%;
   max-width: 800px;
+  border-radius: 20%;
   background-color: rgba(175,175,175,1);
+}
+
+.instruction-caption {
+  margin: 2px;
 }
