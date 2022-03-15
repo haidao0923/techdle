@@ -1,2 +1,4 @@
 # techdle
-A wordle variation based upon a list of over 5000 courses at Georgia Tech.
+<i>A wordle variation based upon a list of over 5000 courses at Georgia Tech.</i>
+<br><br>
+I implement the verification algorithm using a simple and easy to understand method of first checking for green (correct value and location) followed by checking for yellow by iterating over each location in the input for each location in the key. A potential optimization is initializing a Dictionary with the number of occurrences of each letter so the worst case is O(n) per check (note that the algorithm cannot be better than O(n) by nature of a complete search algorithm). Of course, the trade-off is that creating the dictionary is O(Xn) where X is the number of characters in the answer. I believe that further optimization of the dictionary initialization is possible, but the improvement is negligible for a low character count since assume n=5, even with a case of O(n^2) for verification, this is only 25 operation.
